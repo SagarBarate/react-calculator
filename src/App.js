@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import './App.css';
+import useOnlineStatus from './useOnlinestatus';
 
 const  App =() => {
 
   const [result, setResult] = useState("");
+  const onlineStatus = useOnlineStatus();
 
   const handleClick =(e) =>{
     setResult(result.concat(e.target.name));
@@ -30,9 +32,10 @@ const backspace = () =>{
    <>
      <div className='container'>
        <form>
+       <li className='status'>{onlineStatus ? "🟢" : "🔴"}</li> 
         <input type="text" value={result} />
        </form>
-       <div className='keypad'>
+      <div className='keypad'> 
         <button className="highlight" onClick={clear} id="clear">Clear</button>
         <button className="highlight" onClick={backspace} id="backspace">C</button>
         <button className="highlight" name="/"onClick={handleClick}>&divide;</button>
